@@ -1,19 +1,1679 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AxionTax — Monitoramento Tributário Inteligente</title>
-    <meta name="description" content="Monitore programas de regularização fiscal, simule economias e gere relatórios profissionais. A plataforma completa de gestão tributária para escritórios de contabilidade e advocacia." />
-    <meta name="author" content="AxionTax" />
-    <meta property="og:title" content="AxionTax — Monitoramento Tributário Inteligente" />
-    <meta property="og:description" content="Cruze débitos tributários com programas de regularização fiscal. Para escritórios de contabilidade e advocacia tributária." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AxionTax: Plataforma de inteligência tributária que cruza débitos com programas de desconto. Aumente receita e reduza trabalho manual.">
+    <meta name="keywords" content="compliance tributário, escritório contabilidade, desconto fiscal, inteligência tributária, receita tributária, Brasil">
+    <meta name="theme-color" content="#0F172A">
+    <meta property="og:title" content="AxionTax - Inteligência Tributária para Escritórios">
+    <meta property="og:description" content="Plataforma que cruza automaticamente débitos dos seus clientes com programas governamentais de desconto. Mais honorários, menos trabalho manual.">
+    <meta property="og:url" content="https://axiontax.com">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AxionTax - Inteligência Tributária para Escritórios">
+    <meta name="twitter:description" content="Aumente receita tributária do seu escritório de forma automática e segura.">
+    <link rel="canonical" href="https://axiontax.com">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%2306B6D4'/></svg>">
+    <title>AxionTax - Plataforma de Compliance Tributário para Escritórios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Organization",
+      "name": "AxionTax",
+      "url": "https://axiontax.com",
+      "description": "Plataforma de inteligência tributária para escritórios de advocacia e contabilidade que cruza débitos com programas governamentais de desconto",
+      "sameAs": []
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "SoftwareApplication",
+      "name": "AxionTax",
+      "description": "Plataforma de inteligência tributária para escritórios",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Plano Básico",
+          "description": "Para começar"
+        },
+        {
+          "@type": "Offer",
+          "name": "Plano Profissional",
+          "description": "Mais funcionalidades"
+        },
+        {
+          "@type": "Offer",
+          "name": "Plano Enterprise",
+          "description": "Solução completa"
+        }
+      ]
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0F172A;
+            --accent: #06B6D4;
+            --success: #10B981;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #1f2937;
+            background: #ffffff;
+        }
+
+        /* Sticky Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(6, 182, 212, 0.1);
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav a {
+            color: #4b5563;
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .cta-header-btn {
+            background: linear-gradient(135deg, var(--accent), #0891b2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-header-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.3);
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            text-decoration: none;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(16, 185, 129, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.6);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 150px;
+            padding-bottom: 100px;
+            background: linear-gradient(135deg, #f8fafc 0%, #ecf0f5 100%);
+        }
+
+        .hero-content {
+            max-width: 700px;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, var(--accent), #0891b2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(6, 182, 212, 0.3);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(6, 182, 212, 0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--accent);
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* Problem Section */
+        .problem-section {
+            background: white;
+        }
+
+        .problem-section h2 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .pain-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .pain-point {
+            background: #f9fafb;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border-left: 4px solid #ef4444;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .pain-point:nth-child(1) { animation-delay: 0.1s; }
+        .pain-point:nth-child(2) { animation-delay: 0.2s; }
+        .pain-point:nth-child(3) { animation-delay: 0.3s; }
+        .pain-point:nth-child(4) { animation-delay: 0.4s; }
+
+        .pain-point-icon {
+            font-size: 28px;
+            margin-bottom: 0.5rem;
+        }
+
+        .pain-point h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .pain-point p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background: linear-gradient(135deg, #f8fafc 0%, #ecf0f5 100%);
+        }
+
+        .how-it-works h2 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .step {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            text-align: center;
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .step:nth-child(1) { animation-delay: 0.1s; }
+        .step:nth-child(2) { animation-delay: 0.2s; }
+        .step:nth-child(3) { animation-delay: 0.3s; }
+
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(6, 182, 212, 0.15);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent), #0891b2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .step p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .step-arrow {
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: var(--accent);
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .step-arrow {
+                display: block;
+            }
+
+            .step:last-child .step-arrow {
+                display: none;
+            }
+        }
+
+        /* Benefits Section */
+        .benefits {
+            background: white;
+        }
+
+        .benefits h2 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f4f8 100%);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(6, 182, 212, 0.1);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:nth-child(1) { animation-delay: 0.1s; }
+        .benefit-card:nth-child(2) { animation-delay: 0.2s; }
+        .benefit-card:nth-child(3) { animation-delay: 0.3s; }
+        .benefit-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .benefit-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.1);
+        }
+
+        .benefit-icon {
+            font-size: 32px;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-card p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* ROI Calculator */
+        .roi-calculator {
+            background: linear-gradient(135deg, #f8fafc 0%, #ecf0f5 100%);
+        }
+
+        .roi-calculator h2 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .calculator-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.1);
+        }
+
+        .calculator-input {
+            margin-bottom: 2rem;
+        }
+
+        .calculator-input label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .slider-wrapper {
+            position: relative;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(to right, var(--accent), #0891b2);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--accent);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            width: 28px;
+            height: 28px;
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--accent);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .slider-value {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-weight: 700;
+            font-size: 14px;
+            margin-left: 0.5rem;
+        }
+
+        .calculator-result {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 2px solid var(--accent);
+            margin-top: 2rem;
+        }
+
+        .result-label {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .result-breakdown {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            font-size: 13px;
+        }
+
+        .breakdown-item {
+            background: white;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .breakdown-label {
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .breakdown-value {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 16px;
+            margin-top: 0.25rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background: white;
+        }
+
+        .pricing h2 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:nth-child(1) { animation-delay: 0.1s; }
+        .pricing-card:nth-child(2) {
+            animation-delay: 0.2s;
+            border-color: var(--accent);
+            border-width: 3px;
+            transform: scale(1.05);
+        }
+        .pricing-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .pricing-card.featured {
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.2);
+        }
+
+        .pricing-card:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 25px 45px rgba(6, 182, 212, 0.3);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--accent), #0891b2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .pricing-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .pricing-price {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+        }
+
+        .pricing-period {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            font-size: 14px;
+            color: #4b5563;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: 700;
+            margin-right: 0.75rem;
+            font-size: 16px;
+        }
+
+        .pricing-cta {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent), #0891b2);
+            color: white;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:nth-child(2) .pricing-cta {
+            background: linear-gradient(135deg, var(--accent), #0891b2);
+        }
+
+        .pricing-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.3);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: linear-gradient(135deg, #f8fafc 0%, #ecf0f5 100%);
+        }
+
+        .testimonials h2 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .testimonial-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+            border-left: 4px solid var(--accent);
+        }
+
+        .testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+        .testimonial-card:nth-child(2) { animation-delay: 0.2s; }
+        .testimonial-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .testimonial-text {
+            font-size: 15px;
+            color: #4b5563;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 14px;
+        }
+
+        .testimonial-role {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .stars {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 16px;
+        }
+
+        /* FAQ Section */
+        .faq {
+            background: white;
+        }
+
+        .faq h2 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .faq-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .faq-item:nth-child(1) { animation-delay: 0.1s; }
+        .faq-item:nth-child(2) { animation-delay: 0.2s; }
+        .faq-item:nth-child(3) { animation-delay: 0.3s; }
+        .faq-item:nth-child(4) { animation-delay: 0.4s; }
+        .faq-item:nth-child(5) { animation-delay: 0.5s; }
+
+        .faq-question {
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f4f8 100%);
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8ecf1 100%);
+            padding-left: 2rem;
+        }
+
+        .faq-toggle {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            background: white;
+            transition: max-height 0.3s ease;
+            padding: 0 1.5rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 1.5rem;
+        }
+
+        .faq-answer p {
+            color: #6b7280;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* Final CTA Section */
+        .final-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
+            color: white;
+        }
+
+        .final-cta h2 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #e0e7ff;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+        }
+
+        .form-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent), #0891b2);
+            color: white;
+            padding: 0.875rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0f1a;
+            color: #9ca3af;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(6, 182, 212, 0.1);
+        }
+
+        footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 14px;
+        }
+
+        .footer-col a {
+            display: block;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(6, 182, 212, 0.1);
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Mobile touch improvements */
+        button, a {
+            touch-action: manipulation;
+        }
+            text-align: center;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+            }
+
+            nav.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                border-bottom: 1px solid #e5e7eb;
+                padding: 1rem 2rem;
+            }
+
+            nav.active a {
+                margin: 0.75rem 0;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            section {
+                padding: 50px 1.5rem;
+            }
+
+            .calculator-container {
+                padding: 1.5rem;
+            }
+
+            .pricing-card:nth-child(2) {
+                transform: scale(1);
+            }
+
+            .stats-bar {
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 20px;
+            }
+
+            .stat-label {
+                font-size: 12px;
+            }
+
+            h2 {
+                font-size: 28px !important;
+            }
+        }
+
+        /* Scroll Animation Observer */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Counter Animation */
+        @keyframes countUp {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .counter {
+            animation: countUp 0.5s ease;
+        }
+
+        /* Smooth Transitions */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="header-container">
+            <div class="logo">
+                <svg width="180" height="44" viewBox="0 0 240 56">
+                  <g transform="translate(2, 4)">
+                    <line x1="24" y1="8" x2="12" y2="24" stroke="#cbd5e1" stroke-width="1.5"/>
+                    <line x1="24" y1="8" x2="38" y2="20" stroke="#cbd5e1" stroke-width="1.5"/>
+                    <line x1="12" y1="24" x2="20" y2="38" stroke="#cbd5e1" stroke-width="1.5"/>
+                    <line x1="38" y1="20" x2="20" y2="38" stroke="#3b82f6" stroke-width="1.5"/>
+                    <line x1="38" y1="20" x2="44" y2="36" stroke="#cbd5e1" stroke-width="1.5"/>
+                    <line x1="12" y1="24" x2="2" y2="38" stroke="#cbd5e1" stroke-width="1"/>
+                    <circle cx="24" cy="8" r="4" fill="#1e293b"/>
+                    <circle cx="12" cy="24" r="3.5" fill="#3b82f6"/>
+                    <circle cx="38" cy="20" r="4.5" fill="#1e293b"/>
+                    <circle cx="20" cy="38" r="3" fill="#3b82f6"/>
+                    <circle cx="44" cy="36" r="2.5" fill="#60a5fa"/>
+                    <circle cx="2" cy="38" r="2" fill="#93c5fd"/>
+                    <circle cx="38" cy="20" r="2" fill="#3b82f6"/>
+                  </g>
+                  <text x="58" y="25" font-family="Inter, sans-serif" font-weight="800" font-size="22" fill="#0f172a">Axion<tspan fill="#3b82f6">Tax</tspan></text>
+                </svg>
+            </div>
+            <nav>
+                <a href="#como-funciona">Como Funciona</a>
+                <a href="#beneficios">Benefícios</a>
+                <a href="#precos">Preços</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+            <button class="cta-header-btn" onclick="scrollToSection('final-cta')">Demonstração Gratuita</button>
+            <button class="mobile-menu-toggle" onclick="toggleMenu()">☰</button>
+        </div>
+    </header>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/5531999999999" target="_blank" class="whatsapp-btn" title="Fale conosco no WhatsApp">💬</a>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Transforme a carteira do seu escritório em receita tributária</h1>
+            <p>O AxionTax cruza automaticamente os débitos dos seus clientes com programas governamentais de desconto. Mais honorários, menos trabalho manual.</p>
+            <button class="cta-primary" onclick="scrollToSection('final-cta')">Agendar Demonstração Gratuita</button>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number">
+                    <span class="counter" data-target="46">0</span>
+                    <span>bi</span>
+                </div>
+                <div class="stat-label">mapeados</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">
+                    <span class="counter" data-target="5">0</span>
+                </div>
+                <div class="stat-label">programas ativos</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">
+                    <span class="counter" data-target="50">0</span>
+                    <span>%</span>
+                </div>
+                <div class="stat-label">economia média</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section" id="problema">
+        <h2>Seu escritório está perdendo dinheiro</h2>
+        <div class="pain-points">
+            <div class="pain-point">
+                <div class="pain-point-icon">📋</div>
+                <h3>Monitoramento Manual</h3>
+                <p>Acompanhar programas governamentais manualmente consome recursos e deixa oportunidades passar despercebidas.</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-icon">❓</div>
+                <h3>Clientes Desorientados</h3>
+                <p>Sem uma análise sistemática, você não sabe quais clientes podem se beneficiar de programas de desconto tributário.</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-icon">⏰</div>
+                <h3>Prazos Perdidos</h3>
+                <p>Prazos de adesão aos programas passam despercebidos, resultando em oportunidades perdidas de economia.</p>
+            </div>
+            <div class="pain-point">
+                <div class="pain-point-icon">🧮</div>
+                <h3>Cálculos Manuais</h3>
+                <p>Calcular manualmente descontos tributários é lento, propenso a erros e consome tempo de especialistas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="como-funciona">
+        <h2>Como Funciona</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Importe sua carteira</h3>
+                <p>Upload simples em CSV ou planilha com os CNPJs dos seus clientes. Seguro e criptografado.</p>
+                <div class="step-arrow">→</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Cruzamento automático</h3>
+                <p>AxionTax cruza seus clientes com programas federais, estaduais e municipais em tempo real.</p>
+                <div class="step-arrow">→</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Receba os matches</h3>
+                <p>Lista priorizada com clientes, economia estimada e prazos. Pronto para ação.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="beneficios">
+        <h2>Benefícios para seu Escritório</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">💰</div>
+                <h3>Aumente seus honorários</h3>
+                <p>Identifique oportunidades tributárias que passam despercebidas pela concorrência e cobre honorários de sucesso.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">⚡</div>
+                <h3>Automatize o monitoramento</h3>
+                <p>Receba alertas automáticos quando novos programas surgem. Sem trabalho manual, tudo em tempo real.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">⭐</div>
+                <h3>Impressione seus clientes</h3>
+                <p>Relatórios profissionais com economia estimada impressionam clientes e aumentam sua proposição de valor.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🛡️</div>
+                <h3>Zero risco</h3>
+                <p>Modelo de honorários sobre êxito. Você só ganha quando encontra oportunidades reais para seus clientes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator -->
+    <section class="roi-calculator">
+        <h2>Calcule seu ROI Potencial</h2>
+        <div class="calculator-container">
+            <div class="calculator-input">
+                <label for="clients-slider">Quantos clientes com dívida tributária?</label>
+                <div class="slider-wrapper">
+                    <input type="range" id="clients-slider" min="10" max="500" value="50" step="5">
+                    <span class="slider-value" id="clients-value">50</span>
+                </div>
+            </div>
+
+            <div class="calculator-input">
+                <label for="debt-slider">Ticket médio de dívida (R$)</label>
+                <div class="slider-wrapper">
+                    <input type="range" id="debt-slider" min="100000" max="10000000" value="500000" step="50000">
+                    <span class="slider-value" id="debt-value">R$ 500.000</span>
+                </div>
+            </div>
+
+            <div class="calculator-result">
+                <div class="result-label">Receita Potencial Anual de Honorários (15% de economia estimada)</div>
+                <div class="result-value" id="result-value">R$ 562.500</div>
+                <div class="result-breakdown">
+                    <div class="breakdown-item">
+                        <div class="breakdown-label">Mensalmente</div>
+                        <div class="breakdown-value" id="monthly-value">R$ 46.875</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-label">Economia p/ clientes</div>
+                        <div class="breakdown-value" id="savings-value">R$ 3.75M</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="precos">
+        <h2>Planos para Escritórios</h2>
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <div class="pricing-name">Starter</div>
+                <div class="pricing-price">R$ 359</div>
+                <div class="pricing-period">por mês</div>
+                <ul class="pricing-features">
+                    <li>Até 50 CNPJs</li>
+                    <li>Monitoramento de programas</li>
+                    <li>Relatórios em PDF</li>
+                    <li>Alertas por email</li>
+                    <li>Suporte por email</li>
+                </ul>
+                <button class="pricing-cta" onclick="scrollToSection('final-cta')">Começar Agora</button>
+            </div>
+
+            <div class="pricing-card featured">
+                <div class="pricing-badge">Mais Popular</div>
+                <div class="pricing-name">Professional</div>
+                <div class="pricing-price">R$ 789</div>
+                <div class="pricing-period">por mês</div>
+                <ul class="pricing-features">
+                    <li>Até 200 CNPJs</li>
+                    <li>Monitoramento de programas</li>
+                    <li>Relatórios em PDF</li>
+                    <li>Alertas por email</li>
+                    <li>Suporte prioritário</li>
+                    <li>Análises customizadas</li>
+                </ul>
+                <button class="pricing-cta" onclick="scrollToSection('final-cta')">Começar Agora</button>
+            </div>
+
+            <div class="pricing-card">
+                <div class="pricing-name">Enterprise</div>
+                <div class="pricing-price">R$ 1.490</div>
+                <div class="pricing-period">por mês</div>
+                <ul class="pricing-features">
+                    <li>CNPJs ilimitados</li>
+                    <li>Monitoramento de programas</li>
+                    <li>Relatórios em PDF</li>
+                    <li>Alertas por email</li>
+                    <li>API integrada</li>
+                    <li>White-label</li>
+                    <li>Suporte 24/7</li>
+                </ul>
+                <button class="pricing-cta" onclick="scrollToSection('final-cta')">Solicitar Orçamento</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2>O que Nossos Clientes Dizem</h2>
+        <div class="testimonial-cards">
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <div class="testimonial-text">"Em três meses usando AxionTax, identificamos R$ 8.2 milhões em oportunidades tributárias para nossos clientes. Investimento garantido."</div>
+                <div class="testimonial-author">Ana Silva</div>
+                <div class="testimonial-role">Sócia-Diretora, Silva & Associados Advogados</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <div class="testimonial-text">"AxionTax transformou como servimos nossos clientes. Agora identificamos automaticamente programas de desconto que antes passavam despercebidos."</div>
+                <div class="testimonial-author">Carlos Mendes</div>
+                <div class="testimonial-role">Partner, Mendes Contadores & Consultores</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <div class="testimonial-text">"A plataforma é intuitiva e os resultados falam por si. Nossos clientes pequenos agora têm acesso à inteligência tributária que antes só os grandes tinham."</div>
+                <div class="testimonial-author">Marina Costa</div>
+                <div class="testimonial-role">Especialista Tributária, Costa & Bezerra Consultoria</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <h2>Perguntas Frequentes</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Como funciona o cruzamento de dados?
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>AxionTax utiliza machine learning e integração com bancos de dados governamentais para comparar os CNPJs de seus clientes com critérios de elegibilidade de programas de desconto tributário. O processo é automático, seguro e em conformidade com LGPD.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Quais programas governamentais são monitorados?
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Monitoramos os principais programas ativos: REFIS MG 2026 (90% desconto multa, 85% juros), Litígio Zero 2026 (100% multa e juros), Transação Tributária Individual PGFN (70% multa e juros), Acordo Paulista II (100% multa e juros) e REFAZ RS 2026 (95% multa, 90% juros). A base é atualizada continuamente conforme novos programas surgem.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Meus dados estão seguros?
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Sim. Utilizamos criptografia de nível empresarial, conformidade LGPD, e nunca compartilhamos dados de seus clientes. Os dados são armazenados em servidores seguros e você tem total controle sobre quais informações são processadas.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Posso testar antes de assinar?
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutamente! Oferecemos uma demonstração gratuita onde você pode importar alguns clientes de teste e ver os resultados em ação antes de se comprometer com um plano pago.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Como é o suporte?
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Oferecemos suporte por email em todos os planos. Clientes Professional recebem suporte prioritário com resposta em até 4 horas. Enterprise tem suporte 24/7 dedicado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta" id="final-cta">
+        <h2>Comece a Encontrar Oportunidades Tributárias para Seus Clientes Hoje</h2>
+        <div class="form-container">
+            <form id="contact-form" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Seu Nome</label>
+                    <input type="text" id="name" name="name" placeholder="João Silva" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="joao@escritorio.com.br" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="firm">Nome do Escritório</label>
+                    <input type="text" id="firm" name="firm" placeholder="Silva & Associados" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Telefone</label>
+                    <input type="tel" id="phone" name="phone" placeholder="(31) 99999-9999" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="clients">Número de Clientes com Dívida Tributária</label>
+                    <select id="clients" name="clients" required>
+                        <option value="">Selecione...</option>
+                        <option value="1-10">1-10 clientes</option>
+                        <option value="11-50">11-50 clientes</option>
+                        <option value="51-100">51-100 clientes</option>
+                        <option value="101-200">101-200 clientes</option>
+                        <option value="200+">200+ clientes</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="form-submit">Quero uma Demonstração</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <footer-container>
+            <div class="footer-col">
+                <h4>AxionTax</h4>
+                <p style="font-size: 12px; color: #6b7280;">Plataforma de inteligência tributária para escritórios de advocacia e contabilidade.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Links</h4>
+                <a href="#como-funciona">Como Funciona</a>
+                <a href="#beneficios">Benefícios</a>
+                <a href="#precos">Preços</a>
+                <a href="#faq">FAQ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="#terms">Termos de Uso</a>
+                <a href="#privacy">Política de Privacidade</a>
+                <a href="#contact">Contato</a>
+            </div>
+        </footer-container>
+        <div class="footer-bottom">
+            <p>© 2026 AxionTax. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Animated Counter
+        function animateCounter(element) {
+            const target = parseInt(element.dataset.target);
+            const duration = 2000;
+            const start = 0;
+            const startTime = Date.now();
+
+            function updateCounter() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const value = Math.floor(start + (target - start) * progress);
+                element.textContent = value;
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                }
+            }
+
+            updateCounter();
+        }
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+
+                    // Trigger counter animation on first view
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        if (!counter.dataset.animated) {
+                            animateCounter(counter);
+                            counter.dataset.animated = 'true';
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe all scroll-animate elements
+        document.querySelectorAll('.pain-point, .step, .benefit-card, .pricing-card, .testimonial-card, .faq-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Sticky header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // ROI Calculator
+        const clientsSlider = document.getElementById('clients-slider');
+        const debtSlider = document.getElementById('debt-slider');
+        const clientsValue = document.getElementById('clients-value');
+        const debtValue = document.getElementById('debt-value');
+        const resultValue = document.getElementById('result-value');
+        const monthlyValue = document.getElementById('monthly-value');
+        const savingsValue = document.getElementById('savings-value');
+
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 0
+            }).format(value);
+        }
+
+        function updateROI() {
+            const clients = parseInt(clientsSlider.value);
+            const debtPerClient = parseInt(debtSlider.value);
+            const totalDebt = clients * debtPerClient;
+            const estimatedSavings = totalDebt * 0.50; // 50% economia média
+            const honorariumRate = 0.15; // 15% de honorário
+            const annualRevenue = estimatedSavings * honorariumRate;
+            const monthlyRevenue = annualRevenue / 12;
+
+            clientsValue.textContent = clients;
+            debtValue.textContent = formatCurrency(debtPerClient);
+            resultValue.textContent = formatCurrency(annualRevenue);
+            monthlyValue.textContent = formatCurrency(monthlyRevenue);
+            savingsValue.textContent = formatCurrency(estimatedSavings);
+        }
+
+        clientsSlider.addEventListener('input', updateROI);
+        debtSlider.addEventListener('input', updateROI);
+        updateROI();
+
+        // FAQ Toggle
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            item.classList.toggle('active');
+        }
+
+        // Mobile Menu
+        function toggleMenu() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('active');
+        }
+
+        // Smooth scroll to section
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Form submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                firm: document.getElementById('firm').value,
+                phone: document.getElementById('phone').value,
+                clients: document.getElementById('clients').value
+            };
+
+            // Redirect to WhatsApp with form data
+            const message = `Olá! Gostaria de agendar uma demonstração do AxionTax.\n\nDados:\n- Nome: ${formData.name}\n- Email: ${formData.email}\n- Escritório: ${formData.firm}\n- Telefone: ${formData.phone}\n- Clientes com dívida: ${formData.clients}`;
+
+            const whatsappUrl = `https://wa.me/5531999999999?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+
+            // Reset form
+            document.getElementById('contact-form').reset();
+        }
+
+        // Initialize counters on page load if hero is visible
+        window.addEventListener('load', () => {
+            const counters = document.querySelectorAll('.counter');
+            const heroSection = document.querySelector('.hero');
+            if (heroSection.getBoundingClientRect().top < window.innerHeight) {
+                counters.forEach(counter => {
+                    if (!counter.dataset.animated) {
+                        animateCounter(counter);
+                        counter.dataset.animated = 'true';
+                    }
+                });
+            }
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                const nav = document.querySelector('nav');
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
 </html>
